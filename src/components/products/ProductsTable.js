@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useProducts } from '../../contexts/ProductContext';
 import ProductFormModal from './ProductFormModal';
+import LowStockAlert from './LowStockAlert';
+
 
 const ProductsTable = () => {
   const { products, deleteProduct } = useProducts();
@@ -19,6 +21,8 @@ const ProductsTable = () => {
 
   return (
     <div className="p-4">
+        <LowStockAlert />
+
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">Product Inventory</h2>
         <button
