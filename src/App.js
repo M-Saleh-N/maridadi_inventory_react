@@ -2,6 +2,13 @@ import { ProductProvider } from './contexts/ProductContext';
 import { SalesProvider } from './contexts/SalesContext';
 import ProductsTable from './components/products/ProductsTable';
 import SalesForm from './components/sales/SalesForm';
+import { ExpenseProvider } from './contexts/ExpenseContext';
+import ExpensesPage from './pages/ExpensesPage';
+
+<ExpenseProvider>
+  <ExpensesPage />
+</ExpenseProvider>
+
 
 function App() {
   return (
