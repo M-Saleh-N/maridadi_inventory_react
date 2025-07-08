@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useProducts } from '../../contexts/ProductContext';
 import { useSales } from '../../contexts/SalesContext';
+import ReceiptModal from './ReceiptModal'; // ⬅️ Import the receipt modal
 
 const SalesForm = () => {
   const { products } = useProducts();
@@ -9,6 +10,9 @@ const SalesForm = () => {
   const [itemsSold, setItemsSold] = useState([]);
   const [customer, setCustomer] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('Cash');
+
+  const [lastSale, setLastSale] = useState(null);
+  const [showReceipt, setShowReceipt] = useState(false);
 
   const handleQuantityChange = (productId, quantity) => {
     const existing = itemsSold.find(item => item.productId === productId);
@@ -37,16 +41,20 @@ const SalesForm = () => {
 
     const total = soldDetails.reduce((sum, item) => sum + item.totalPrice, 0);
 
-    addSale({
+    const sale = {
       id: `SALE${Date.now()}`,
       items: soldDetails,
       total,
       customer,
       paymentMethod,
       date: new Date().toISOString(),
-    });
+    };
 
-    // Clear form
+    addSale(sale);
+    setLastSale(sale);
+    setShowReceipt(true); // ⬅️ Trigger modal
+
+    // Reset form
     setItemsSold([]);
     setCustomer('');
     setPaymentMethod('Cash');
@@ -95,6 +103,13 @@ const SalesForm = () => {
           Save Sale
         </button>
       </form>
+
+      {/* Show receipt modal */}
+      <ReceiptModal
+        isOpen={showReceipt}
+        onClose={() => setShowReceipt(false)}
+        sale={lastSale}
+      />
     </div>
   );
 };

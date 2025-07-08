@@ -84,6 +84,8 @@ const ReceiptModal = ({ isOpen, onClose, sale }) => {
       </div>
     </div>
   );
+
+  
 };
 
 export default ReceiptModal;
