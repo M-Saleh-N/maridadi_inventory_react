@@ -6,7 +6,6 @@ import { useSales } from '../contexts/SalesContext';
 const SalesPage = () => {
   const { sales } = useSales();
 
-  // Format each sale into flat rows for CSV
   const salesCSV = sales.flatMap((sale) =>
     sale.items.map((item) => ({
       SaleID: sale.id,
@@ -21,9 +20,14 @@ const SalesPage = () => {
   );
 
   return (
-    <div className="grid md:grid-cols-2 gap-6">
-      <SalesForm />
+    <div className="grid md:grid-cols-2 gap-6 p-4">
+      {/* Left Side: Sales Form */}
       <div>
+        <SalesForm />
+      </div>
+
+      {/* Right Side: Sales History + Export */}
+      <div className="space-y-4">
         <SalesHistory />
         <ExportCSV
           data={salesCSV}
