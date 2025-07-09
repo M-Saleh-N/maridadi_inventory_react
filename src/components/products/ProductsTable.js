@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useProducts } from '../../contexts/ProductContext';
+import { useAuth } from '../../contexts/AuthContext'; // 🔐 import Auth
 import ProductFormModal from './ProductFormModal';
 import LowStockAlert from './LowStockAlert';
 
-
 const ProductsTable = () => {
   const { products, deleteProduct } = useProducts();
+  const { user } = useAuth(); // 🔐 get current user
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
 
@@ -21,7 +22,7 @@ const ProductsTable = () => {
 
   return (
     <div className="p-4">
-        <LowStockAlert />
+      <LowStockAlert />
 
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">Product Inventory</h2>
@@ -63,12 +64,15 @@ const ProductsTable = () => {
                 >
                   Edit
                 </button>
-                <button
-                  onClick={() => deleteProduct(prod.id)}
-                  className="text-red-600 hover:underline"
-                >
-                  Delete
-                </button>
+
+                {user?.role === 'admin' && (
+                  <button
+                    onClick={() => deleteProduct(prod.id)}
+                    className="text-red-600 hover:underline"
+                  >
+                    Delete
+                  </button>
+                )}
               </td>
             </tr>
           ))}
