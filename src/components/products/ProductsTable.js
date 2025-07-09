@@ -67,7 +67,7 @@ const ProductsTable = () => {
 
                 {user?.role === 'admin' && (
                   <button
-                    onClick={() => deleteProduct(prod.id)}
+                    onClick={() => deleteProduct(prod.id, user)} // ✅ pass user
                     className="text-red-600 hover:underline"
                   >
                     Delete
