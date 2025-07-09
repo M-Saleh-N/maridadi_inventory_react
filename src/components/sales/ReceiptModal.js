@@ -15,9 +15,10 @@ const ReceiptModal = ({ isOpen, onClose, sale }) => {
             table { width: 100%; border-collapse: collapse; margin-top: 20px; }
             th, td { padding: 8px; border-bottom: 1px solid #ccc; text-align: left; }
             h2 { text-align: center; }
+            .footer { text-align: center; margin-top: 30px; font-style: italic; }
           </style>
         </head>
-        <body>${printContents}</body>
+        <body>${printContents}<p class="footer">Thank you for your purchase! 🌈</p></body>
       </html>
     `);
     newWin.document.close();
@@ -30,9 +31,7 @@ const ReceiptModal = ({ isOpen, onClose, sale }) => {
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-xl">
         <div ref={receiptRef}>
-          <h2 className="text-xl font-bold text-center mb-2">
-            Maridadi Bouquets KE
-          </h2>
+          <h2 className="text-xl font-bold text-center mb-2">Maridadi Bouquets KE</h2>
           <p className="text-center text-sm">Nakuru, Kenya</p>
           <hr className="my-2" />
 
@@ -68,24 +67,16 @@ const ReceiptModal = ({ isOpen, onClose, sale }) => {
         </div>
 
         <div className="flex justify-end gap-2 mt-4">
-          <button
-            onClick={onClose}
-            className="px-3 py-1 bg-gray-300 rounded"
-          >
+          <button onClick={onClose} className="px-3 py-1 bg-gray-300 rounded">
             Close
           </button>
-          <button
-            onClick={handlePrint}
-            className="px-3 py-1 bg-green-600 text-white rounded"
-          >
+          <button onClick={handlePrint} className="px-3 py-1 bg-green-600 text-white rounded">
             Print
           </button>
         </div>
       </div>
     </div>
   );
-
-  
 };
 
 export default ReceiptModal;
