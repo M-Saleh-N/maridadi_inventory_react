@@ -11,14 +11,39 @@ const ReceiptModal = ({ isOpen, onClose, sale }) => {
         <head>
           <title>Receipt</title>
           <style>
-            body { font-family: Arial; padding: 20px; }
-            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-            th, td { padding: 8px; border-bottom: 1px solid #ccc; text-align: left; }
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            .receipt { max-width: 500px; margin: auto; }
             h2 { text-align: center; }
-            .footer { text-align: center; margin-top: 30px; font-style: italic; }
+            .info p { margin: 4px 0; }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin-top: 20px;
+            }
+            th, td {
+              padding: 8px;
+              border-bottom: 1px solid #ccc;
+              text-align: left;
+            }
+            .total {
+              text-align: right;
+              margin-top: 10px;
+              font-weight: bold;
+            }
+            .footer {
+              text-align: center;
+              margin-top: 30px;
+              font-style: italic;
+              color: #555;
+            }
           </style>
         </head>
-        <body>${printContents}<p class="footer">Thank you for your purchase! 🌈</p></body>
+        <body>
+          <div class="receipt">
+            ${printContents}
+            <p class="footer">Thank you for your purchase! 🌸</p>
+          </div>
+        </body>
       </html>
     `);
     newWin.document.close();
@@ -30,12 +55,12 @@ const ReceiptModal = ({ isOpen, onClose, sale }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-xl">
-        <div ref={receiptRef}>
+        <div ref={receiptRef} className="receipt">
           <h2 className="text-xl font-bold text-center mb-2">Maridadi Bouquets KE</h2>
           <p className="text-center text-sm">Nakuru, Kenya</p>
           <hr className="my-2" />
 
-          <div className="text-sm">
+          <div className="text-sm info">
             <p><strong>Sale ID:</strong> {sale.id}</p>
             <p><strong>Date:</strong> {new Date(sale.date).toLocaleString()}</p>
             {sale.customer && <p><strong>Customer:</strong> {sale.customer}</p>}
