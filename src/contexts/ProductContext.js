@@ -27,7 +27,13 @@ export const ProductProvider = ({ children }) => {
     setProducts(products.map(p => (p.id === id ? updatedProduct : p)));
   };
 
-  const deleteProduct = (id) => {
+  // ✅ Delete with user role check
+  const deleteProduct = (id, user) => {
+    if (!user || user.role !== 'admin') {
+      alert('Only admins can delete products.');
+      return;
+    }
+
     setProducts(products.filter(p => p.id !== id));
   };
 
