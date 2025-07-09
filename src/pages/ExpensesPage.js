@@ -16,10 +16,19 @@ const ExpensesPage = () => {
   }));
 
   return (
-    <div className="grid md:grid-cols-3 gap-6">
-      <ExpenseForm />
-      <ExpenseList />
-      <div>
+    <div className="grid md:grid-cols-3 gap-6 p-4">
+      {/* Column 1: Add new expense */}
+      <div className="col-span-1">
+        <ExpenseForm />
+      </div>
+
+      {/* Column 2: Expense List */}
+      <div className="col-span-1">
+        <ExpenseList />
+      </div>
+
+      {/* Column 3: Summary + Export */}
+      <div className="col-span-1 space-y-4">
         <ExpenseSummary />
         <ExportCSV
           data={expenseCSV}

@@ -4,20 +4,22 @@ import { CSVLink } from 'react-csv';
 const ExportExpensesCSV = () => {
   const { expenses } = useExpenses();
 
+  // Define CSV headers
   const headers = [
     { label: 'Expense ID', key: 'id' },
     { label: 'Name', key: 'name' },
     { label: 'Category', key: 'category' },
     { label: 'Amount (Ksh)', key: 'amount' },
-    { label: 'Date', key: 'date' },
+    { label: 'Date', key: 'formattedDate' },
   ];
 
+  // Format data for export
   const data = expenses.map(e => ({
     id: e.id,
     name: e.name,
     category: e.category,
     amount: e.amount,
-    date: new Date(e.date).toLocaleDateString(),
+    formattedDate: new Date(e.date).toLocaleDateString(),
   }));
 
   return (
@@ -25,8 +27,8 @@ const ExportExpensesCSV = () => {
       <CSVLink
         data={data}
         headers={headers}
-        filename="expenses_data.csv"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        filename={`expenses_${Date.now()}.csv`}
+        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition"
       >
         Export Expenses to CSV
       </CSVLink>
