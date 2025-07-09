@@ -1,6 +1,8 @@
 import { useProducts } from '../../contexts/ProductContext';
 import { useSales } from '../../contexts/SalesContext';
 import { useExpenses } from '../../contexts/ExpenseContext';
+import SalesChart from '../charts/SalesChart';
+import ExpenseChart from '../charts/ExpenseChart';
 
 const Dashboard = () => {
   const { products } = useProducts();
@@ -45,6 +47,12 @@ const Dashboard = () => {
           <h3 className="font-bold">Sales Today</h3>
           <p className="text-2xl">{todaysSales.length}</p>
         </div>
+      </div>
+
+      {/* Charts Section */}
+      <div className="grid md:grid-cols-2 gap-6 mt-8">
+        <SalesChart />
+        <ExpenseChart />
       </div>
     </div>
   );
